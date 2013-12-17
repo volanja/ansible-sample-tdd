@@ -1,0 +1,21 @@
+---
+# Nginx
+
+- name: Template nginx.repo
+  template: src=nginx.repo dest=/etc/yum.repos.d/nginx.repo mode=0644
+
+- name: install Nginx
+  yum: pkg={{ item }} state=installed enablerepo=nginx
+  with_items:
+    - nginx
+
+- name: ensure nginx is running automatically at boot time
+  service: name=nginx state=started enabled=yes
+
+- name: insert iptables rule
+  lineinfile: dest=/etc/sysconfig/iptables state=present regexp="{{ www_port }}"
+              insertafter="^:OUTPUT " line="-A INPUT -p tcp --dport {{ www_port }} -j ACCEPT"
+
+- name: Restart iptables
+  shell: restorecon /etc/sysconfig/iptables
+  notify: restart iptables

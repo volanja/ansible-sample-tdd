@@ -1,0 +1,5 @@
+- name: Ansible-Sample-TDD
+  hosts: server
+  user: root
+  roles:
+    - nginx
