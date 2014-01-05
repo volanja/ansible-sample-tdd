@@ -16,50 +16,88 @@ serverspec (0.13.5)
 
 ```
 
+# Directory
+
+```
+.
+├── README.md
+├── hosts                        #use Ansible and Serverspec
+├── site.yml                     #use Ansible and Serverspec
+├── nginx.yml                    #(comment-out) incluted by site.yml
+├── roles
+│   ├── mariadb
+│   │   ├── spec
+│   │   │   └── mariadb_spec.rb
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   └── templates
+│   │       └── mariadb.repo
+│   └── nginx
+│       ├── handlers
+│       │   └── main.yml
+│       ├── spec                 #use Serverspec
+│       │   └── nginx_spec.rb
+│       ├── tasks
+│       │   └── main.yml
+│       ├── templates
+│       │   └── nginx.repo
+│       └── vars
+│           └── main.yml
+├── Rakefile                     #use Serverspec
+└── spec                         #use Serverspec 
+    └── spec_helper.rb
+```
+
 # Run Playbook
 
-**Please re-write Your target IP-Adress of Server -> hosts, spec/192.168.0.103. default is 192.168.0.103**
+**Please re-write Your target IP-Adress of Server -> hosts (default is 192.168.0.103)**
 
 ```
 $ ansible-playbook site.yml -i hosts
-
-PLAY [Ansible-Sample-TDD] ***************************************************** 
-
-GATHERING FACTS *************************************************************** 
-ok: [192.168.0.103]
-
-TASK: [nginx | Template nginx.repo] ******************************************* 
-changed: [192.168.0.103]
-
-TASK: [nginx | install Nginx] ************************************************* 
-changed: [192.168.0.103] => (item=nginx)
-
-TASK: [nginx | ensure nginx is running automatically at boot time] ************ 
-changed: [192.168.0.103]
-
-TASK: [nginx | insert iptables rule] ****************************************** 
-changed: [192.168.0.103]
-
-TASK: [nginx | Restart iptables] ********************************************** 
-changed: [192.168.0.103]
-
-NOTIFIED: [nginx | restart iptables] ****************************************** 
-changed: [192.168.0.103]
-
-PLAY RECAP ******************************************************************** 
-192.168.0.103              : ok=7    changed=6    unreachable=0    failed=0   
-
 ```
 
 #Run Test
+Serverspec use this file.  
+Rakefile understand Notation of Ansible.
+
+* hosts
+hosts can use [group_name]  
+```hosts
+[server]
+192.168.0.103
+#192.168.0.104
+
+[web-server]
+192.168.0.105
+192.168.0.106
+```
+
+* site.yml
+site.yml can use ```include```
+```site.yml
+#- include: nginx.yml
+- name: Ansible-Sample-TDD
+  hosts: server
+  user: root
+  roles:
+    - nginx
+    - mariadb
+```
 
 ```
-$rake spec
-/Users/Adr/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec spec/192.168.0.103/nginx_spec.rb
+$ rake -T
+rake serverspec:Ansible-Sample-TDD  # Run serverspec for Ansible-Sample-TDD
+
+$ rake serverspec:Ansible-Sample-TDD
+Run serverspec for Ansible-Sample-TDD to 192.168.0.103
+/Users/Adr/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec roles/nginx/spec/nginx_spec.rb
 ......
 
-Finished in 0.24233 seconds
+Finished in 0.23635 seconds
 6 examples, 0 failures
 ```
 
+# TODO
 
+* hard-coding some things in Rakefile (inventory-file, private-key)
+* create gem

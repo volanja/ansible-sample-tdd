@@ -1,0 +1,15 @@
+- name: Template mariadb.repo
+  template: src=mariadb.repo dest=/etc/yum.repos.d/mariadb.repo mode=0644
+
+- name: Install MariaDB
+  yum: pkg={{ item }} state=present enablerepo=mariadb
+  with_items:
+    - MariaDB-server
+    - MariaDB-client
+    - MariaDB-common
+    - MariaDB-compat
+    - MariaDB-devel
+    - MySQL-python
+
+- name: chkconfig on MariaDB
+  service: name=mysql state=started enabled=yes
