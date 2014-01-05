@@ -103,4 +103,4 @@ Finished in 0.34306 seconds
 # TODO
 
 * hard-coding some things in Rakefile (inventory-file, private-key) to Configfile??
-* create gem
+* create gem =>  Gem is [here](http://rubygems.org/gems/ansible_spec)
