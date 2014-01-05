@@ -56,12 +56,13 @@ serverspec (0.13.5)
 $ ansible-playbook site.yml -i hosts
 ```
 
-#Run Test
-Serverspec use this file.  
-Rakefile understand Notation of Ansible.
+#Test
+## Serverspec with Ansible
+Serverspec use this file.  (Rakefile understand Notation of Ansible.)  
 
-* hosts
+* hosts  
 hosts can use [group_name]  
+
 ```hosts
 [server]
 192.168.0.103
@@ -72,8 +73,9 @@ hosts can use [group_name]
 192.168.0.106
 ```
 
-* site.yml
-site.yml can use ```include```
+* site.yml  
+site.yml can use ```include```  
+
 ```site.yml
 #- include: nginx.yml
 - name: Ansible-Sample-TDD
@@ -84,20 +86,21 @@ site.yml can use ```include```
     - mariadb
 ```
 
+## Run Test
 ```
 $ rake -T
 rake serverspec:Ansible-Sample-TDD  # Run serverspec for Ansible-Sample-TDD
 
 $ rake serverspec:Ansible-Sample-TDD
 Run serverspec for Ansible-Sample-TDD to 192.168.0.103
-/Users/Adr/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec roles/nginx/spec/nginx_spec.rb
-......
+/Users/Adr/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec roles/mariadb/spec/mariadb_spec.rb roles/nginx/spec/nginx_spec.rb
+...........
 
-Finished in 0.23635 seconds
-6 examples, 0 failures
+Finished in 0.34306 seconds
+11 examples, 0 failures
 ```
 
 # TODO
 
-* hard-coding some things in Rakefile (inventory-file, private-key)
+* hard-coding some things in Rakefile (inventory-file, private-key) to Configfile??
 * create gem
