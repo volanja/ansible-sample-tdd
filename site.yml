@@ -1,4 +1,3 @@
-#- include: nginx.yml
 - name: Ansible-Sample-TDD
   hosts: server
   user: root

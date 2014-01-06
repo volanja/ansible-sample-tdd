@@ -50,7 +50,7 @@ serverspec (0.13.5)
 
 # Run Playbook
 
-**Please re-write Your target IP-Adress of Server -> hosts (default is 192.168.0.103)**
+**Please re-write Your target IP-Adress of Server -> hosts (default is 192.168.0.103 and 104)**
 
 ```
 $ ansible-playbook site.yml -i hosts
@@ -66,18 +66,13 @@ hosts can use [group_name]
 ```hosts
 [server]
 192.168.0.103
-#192.168.0.104
-
-[web-server]
-192.168.0.105
-192.168.0.106
+192.168.0.104
 ```
 
 * site.yml  
 site.yml can use ```include```  
 
 ```site.yml
-#- include: nginx.yml
 - name: Ansible-Sample-TDD
   hosts: server
   user: root
@@ -87,16 +82,23 @@ site.yml can use ```include```
 ```
 
 ## Run Test
+
 ```
 $ rake -T
-rake serverspec:Ansible-Sample-TDD  # Run serverspec for Ansible-Sample-TDD
+rake serverspec:Ansible-Sample-TDD  # Run serverspec for Ansible-Sample-TDD / Run serverspec for Ansible-Sample-TDD 
 
 $ rake serverspec:Ansible-Sample-TDD
 Run serverspec for Ansible-Sample-TDD to 192.168.0.103
-/Users/Adr/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec roles/mariadb/spec/mariadb_spec.rb roles/nginx/spec/nginx_spec.rb
+/Users/Adr/.rvm/rubies/ruby-1.9.2-p320/bin/ruby -S rspec roles/mariadb/spec/mariadb_spec.rb roles/nginx/spec/nginx_spec.rb
 ...........
 
-Finished in 0.34306 seconds
+Finished in 0.40289 seconds
+11 examples, 0 failures
+Run serverspec for Ansible-Sample-TDD to 192.168.0.104
+/Users/Adr/.rvm/rubies/ruby-1.9.2-p320/bin/ruby -S rspec roles/mariadb/spec/mariadb_spec.rb roles/nginx/spec/nginx_spec.rb
+...........
+
+Finished in 0.4004 seconds
 11 examples, 0 failures
 ```
 
