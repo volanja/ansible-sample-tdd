@@ -5,6 +5,9 @@ Test Driven Development for Ansible  by ServerSpec. It's Sample
 
 ServerSpec is test framework based on Ruby.
 
+If you want to use these specfiles on other project, please use ansible_spec that ruby-gem for create Rakefile and spec/spec_helper.rb
+[ansible_spec](http://rubygems.org/gems/ansible_spec)
+
 # Environment
 
 ```
@@ -105,4 +108,3 @@ Finished in 0.4004 seconds
 # TODO
 
 * hard-coding some things in Rakefile (inventory-file, private-key) to Configfile??
-* create gem =>  Gem is [here](http://rubygems.org/gems/ansible_spec)
