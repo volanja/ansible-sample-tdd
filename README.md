@@ -24,9 +24,10 @@ serverspec (0.13.5)
 
 ```
 .
+├── .ansiblespec                 #Create file (use Serverspec)
 ├── README.md
-├── hosts                        #use Ansible and Serverspec
-├── site.yml                     #use Ansible and Serverspec
+├── hosts                        #use Ansible and Serverspec if .ansiblespec is not exist.
+├── site.yml                     #use Ansible and Serverspec if .ansiblespec is not exist.
 ├── nginx.yml                    #(comment-out) incluted by site.yml
 ├── roles
 │   ├── mariadb
@@ -50,6 +51,19 @@ serverspec (0.13.5)
 ├── Rakefile                     #use Serverspec
 └── spec                         #use Serverspec 
     └── spec_helper.rb
+```
+
+## Change .ansiblespec(v0.0.1.3)
+read [this seciton](https://github.com/volanja/ansible_spec#change-ansiblespecv0013)
+If `.ansiblespec` is exist, use variables(playbook and inventory).  
+So, If you don't use `site.yml` and `hosts`, you change this file.  
+If `.ansiblespec` not found, use `site.yml` as playbook and `hosts` as inventory.  
+
+```.ansiblespec
+--- 
+- 
+  playbook: site.yml
+  inventory: hosts
 ```
 
 # Run Playbook
