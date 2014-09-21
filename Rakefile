@@ -2,13 +2,30 @@ require 'rake'
 require 'rspec/core/rake_task'
 require 'yaml'
 
+# param: none
+# return: @playbook, @inventoryfile
+def load_ansiblespec()
+  f = '.ansiblespec'
+  if File.exist?(f)
+    y = YAML.load_file(f)
+    @playbook = y[0]['playbook']
+    @inventoryfile = y[0]['inventory']
+  else
+    @playbook = 'site.yml'
+    @inventoryfile = 'hosts'
+  end
+  if File.exist?(@playbook) == false
+    puts 'Error: ' + @playbook + ' is not Found. create site.yml or /.ansiblespec  See https://github.com/volanja/ansible_spec'
+    exit 1
+  elsif File.exist?(@inventoryfile) == false
+    puts 'Error: ' + @inventoryfile + ' is not Found. create hosts or /.ansiblespec  See https://github.com/volanja/ansible_spec'
+    exit 1
+  end
+end
+
 # param: inventory file of Ansible
 # return: Hash {"active_group_name" => ["192.168.0.1","192.168.0.2"]}
 def load_host(file)
-  if File.exist?(file) == false
-    puts 'Error: Please create inventory file. name MUST "hosts"'
-    exit
-  end
   hosts = File.open(file).read
   active_group = Hash.new
   active_group_name = ''
@@ -26,7 +43,9 @@ def load_host(file)
   return active_group
 end
 
-load_file = YAML.load_file('site.yml')
+# main
+load_ansiblespec
+load_file = YAML.load_file(@playbook)
 
 # e.g. comment-out
 if load_file === false
@@ -45,7 +64,7 @@ end
 
 
 #load inventry file
-hosts = load_host('hosts')
+hosts = load_host(@inventoryfile)
 properties.each do |var|
   if hosts.has_key?("#{var["hosts"]}")
     var["hosts"] = hosts["#{var["hosts"]}"]
