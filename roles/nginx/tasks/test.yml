@@ -1,0 +1,26 @@
+- shell: rpm -qi nginx
+  register: p_installed
+
+- shell: chkconfig --list | grep nginx
+  register: p_enabled
+
+- shell: ps aux | grep nginx
+  register: p_running
+
+- shell: netstat -ant | grep 80
+  register: p_listen
+
+- stat: path=/etc/nginx/nginx.conf
+  register: p_exist
+
+- shell: cat /etc/nginx/nginx.conf
+  register: p_cat
+
+- assert:
+    that:
+       - p_installed is defined
+       - p_enabled is defined
+       - p_running is defined
+       - p_listen is defined
+       - p_exist.stat.exists
+       - "'worker_connections  1024;' in p_cat.stdout"

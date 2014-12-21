@@ -19,3 +19,6 @@
 - name: Restart iptables
   shell: restorecon /etc/sysconfig/iptables
   notify: restart iptables
+
+- include: test.yml
+  tags: test
