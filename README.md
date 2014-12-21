@@ -120,6 +120,16 @@ Finished in 0.4004 seconds
 11 examples, 0 failures
 ```
 
+## Run Test only Ansible
+Switch branch to add-test.  
+And Run Task.  
+
+```
+ansible-playbook site.yml -i hosts -t test
+```
+
+test is exist in `roles/nginx/tasks/test.yml`  
+
 # TODO
 
 * hard-coding some things in Rakefile (inventory-file, private-key) to Configfile??
