@@ -1,3 +1,32 @@
 [server]
 192.168.0.103
-192.168.0.104
+
+# under sample
+
+#192.168.0.103:22
+#192.168.0.103 ansible_ssh_port=22
+#192.168.0.103 ansible_ssh_private_key_file=~/.ssh/id_rsa
+#test ansible_ssh_host=192.168.0.103
+#192.168.0.103 ansible_ssh_user=root
+#jumper ansible_ssh_port=22 ansible_ssh_host=192.168.0.103
+
+#[sample]
+#(comment) www1.example.com to www99.example.com
+#www[1:99].example.com
+
+#(comment)  www01.example.com to www99.example.com
+#www[01:99].example.com
+
+#(comment)  db-a.example.com to db-z.example.com
+#db-[a:z].example.com
+
+#(comment)  db-A.example.com to db-Z.example.com
+#db-[A:Z].example.com
+
+#[databases]
+#192.168.0.103
+
+#(comment)  Multi Group. use server & databases
+#[group:children]
+#sample
+#databases
