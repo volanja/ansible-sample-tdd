@@ -2,11 +2,11 @@
 
 Test Driven Development for Ansible  by ServerSpec. It's Sample
 
-ServerSpec is test framework based on Ruby.
+ServerSpec is a test framework based on Ruby.
 
 **NOTICE**  
 If you want to use these specfiles on other project,  
-Please install `ansible_spec` that ruby-gem for parse Ansible playbook & inventoryfiles.
+Please install `ansible_spec` ruby-gem to parse Ansible playbook & inventory files.
 - [Rubygems - ansible_spec](http://rubygems.org/gems/ansible_spec)
 - [Github - ansible_spec](https://github.com/volanja/ansible_spec)
 
@@ -37,10 +37,10 @@ gem install ansible_spec
 .
 ├── .ansiblespec                 #Create file (use Serverspec)
 ├── README.md
-├── hosts                        #use Ansible and Serverspec if .ansiblespec is not exist.
-├── exec_hosts.sh                #Dynamic Inventory sample. if use DynamicInventory, change `.ansiblespec`
-├── site.yml                     #use Ansible and Serverspec if .ansiblespec is not exist.
-├── nginx.yml                    #(comment-out) incluted by site.yml
+├── hosts                        #use Ansible and Serverspec if `.ansiblespec` do not exist.
+├── exec_hosts.sh                #Dynamic Inventory sample. if you use DynamicInventory, change `.ansiblespec`
+├── site.yml                     #use Ansible and Serverspec if `.ansiblespec` do not exist.
+├── nginx.yml                    #(comment-out) included by site.yml
 ├── roles
 │   ├── mariadb
 │   │   ├── spec
@@ -66,10 +66,10 @@ gem install ansible_spec
 ```
 
 ## Change .ansiblespec(v0.0.1.3)
-read [this seciton](https://github.com/volanja/ansible_spec#change-ansiblespecv0013)
-If `.ansiblespec` is exist, use variables(playbook and inventory).  
-So, If you don't use `site.yml` and `hosts`, you change this file.  
-If `.ansiblespec` not found, use `site.yml` as playbook and `hosts` as inventory.  
+read [this section](https://github.com/volanja/ansible_spec#change-ansiblespecv0013)
+If `.ansiblespec` exist, use variables(playbook and inventory).  
+So, If you don't use `site.yml` and `hosts`, you need to change this file.  
+If `.ansiblespec` is not found, use `site.yml` as playbook and `hosts` as inventory.  
 
 ```.ansiblespec
 --- 
@@ -80,7 +80,7 @@ If `.ansiblespec` not found, use `site.yml` as playbook and `hosts` as inventory
 
 # Run Playbook
 
-Please re-write Your target IP-Adress of Server -> hosts (default is 192.168.0.103 and 104)
+Please change the target IP address of server -> hosts (default is 192.168.0.103 and 104)
 
 ```
 $ ansible-playbook site.yml -i hosts
@@ -88,7 +88,7 @@ $ ansible-playbook site.yml -i hosts
 
 #Test
 ## Serverspec with Ansible
-Serverspec use this file.  (Rakefile understand Notation of Ansible.)  
+Serverspec use this file.  (Rakefile understand the syntax of Ansible.)  
 
 * hosts  
 hosts can use [group_name]  
