@@ -6,7 +6,7 @@ ServerSpec is a test framework based on Ruby.
 
 **NOTICE**  
 If you want to use these specfiles on other project,  
-Please install `ansible_spec` ruby-gem tp parse Ansible playbook & inventory files.
+Please install `ansible_spec` ruby-gem to parse Ansible playbook & inventory files.
 - [Rubygems - ansible_spec](http://rubygems.org/gems/ansible_spec)
 - [Github - ansible_spec](https://github.com/volanja/ansible_spec)
 
@@ -37,9 +37,9 @@ gem install ansible_spec
 .
 ├── .ansiblespec                 #Create file (use Serverspec)
 ├── README.md
-├── hosts                        #use Ansible and Serverspec if .ansiblespec do not exist.
+├── hosts                        #use Ansible and Serverspec if `.ansiblespec` do not exist.
 ├── exec_hosts.sh                #Dynamic Inventory sample. if you use DynamicInventory, change `.ansiblespec`
-├── site.yml                     #use Ansible and Serverspec if .ansiblespec do not exist.
+├── site.yml                     #use Ansible and Serverspec if `.ansiblespec` do not exist.
 ├── nginx.yml                    #(comment-out) included by site.yml
 ├── roles
 │   ├── mariadb
