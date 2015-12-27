@@ -14,14 +14,13 @@ Please install `ansible_spec` ruby-gem to parse Ansible playbook & inventory fil
 
 ```
 $ ruby -v
-ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.4.2]
+ruby 2.0.0p353 (2013-11-22 revision 43784) [x86_64-darwin11.4.2]
 
 $ gem list (needs)
-ansible_spec (0.1)
-serverspec (2.7.1)
-specinfra (2.11.3)
+ansible_spec (0.2.6)
+serverspec (2.23.1)
+specinfra (2.43.4)
 hostlist_expression (0.2.1)
-oj (2.9.9)
 ```
 
 # Important( from v0.1)
