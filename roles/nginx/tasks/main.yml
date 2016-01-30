@@ -9,13 +9,15 @@
   with_items:
     - nginx
 
+- name: insert iptables rule
+  lineinfile:
+    dest=/etc/nginx/nginx.conf
+    regexp="^\\s+worker_connections "
+    line="    worker_connections  {{worker_connections}};"
+
 - name: ensure nginx is running automatically at boot time
-  service: name=nginx state=started enabled=yes
+  service: name=nginx state=restarted enabled=yes
 
 - name: insert iptables rule
-  lineinfile: dest=/etc/sysconfig/iptables state=present regexp="{{ www_port }}"
-              insertafter="^:OUTPUT " line="-A INPUT -p tcp --dport {{ www_port }} -j ACCEPT"
+  command: firewall-cmd --add-port "{{ www_port }}/tcp" --permanent
 
-- name: Restart iptables
-  shell: restorecon /etc/sysconfig/iptables
-  notify: restart iptables
