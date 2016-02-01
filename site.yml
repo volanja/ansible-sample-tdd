@@ -1,6 +1,8 @@
 - name: Ansible-Sample-TDD
   hosts: server
   user: root
+  vars:
+    worker_connections: 2048
   roles:
     - nginx
     - mariadb

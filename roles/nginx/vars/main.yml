@@ -1,3 +1,0 @@
----
-www_port: 80
-worker_connections: 2048
