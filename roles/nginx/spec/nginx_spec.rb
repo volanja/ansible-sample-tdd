@@ -9,11 +9,11 @@ describe service('nginx') do
   it { should be_running   }
 end
 
-describe port(80) do
+describe port(property['www_port']) do
   it { should be_listening }
 end
 
 describe file('/etc/nginx/nginx.conf') do
   it { should be_file }
-  it { should contain "worker_connections  1024;" }
+  it { should contain "worker_connections  #{property['worker_connections']};" }
 end
