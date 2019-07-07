@@ -14,12 +14,13 @@ Please install `ansible_spec` ruby-gem to parse Ansible playbook & inventory fil
 
 ```
 $ ruby -v
-ruby 2.0.0p353 (2013-11-22 revision 43784) [x86_64-darwin11.4.2]
+ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
 
 $ gem list (needs)
-ansible_spec (0.2.6)
-serverspec (2.23.1)
-specinfra (2.43.4)
+ansible_spec (0.3)
+ansible-vault (0.2.1)
+serverspec (2.41.3)
+specinfra (2.75.1)
 hostlist_expression (0.2.1)
 ```
 
@@ -94,7 +95,7 @@ hosts can use [group_name]
 
 ```hosts
 [server]
-192.168.0.103
+192.168.100.203
 
 # under sample
 
