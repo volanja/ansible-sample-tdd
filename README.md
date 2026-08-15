@@ -4,6 +4,9 @@ Test Driven Development for Ansible  by ServerSpec. It's Sample
 
 ServerSpec is a test framework based on Ruby.
 
+> [!CAUTION]
+> This repository has been archived. There will be no further updates.
+
 **NOTICE**  
 If you want to use these specfiles on other project,  
 Please install `ansible_spec` ruby-gem to parse Ansible playbook & inventory files.
